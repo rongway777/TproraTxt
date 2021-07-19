@@ -17,3 +17,11 @@
 
 #### 加载
 
+静态加载和动态加载。
+
+传值
+
+activity-->fragment 设置arguments 然后获取bundle。
+
+fragment--activity  写个接口。
+
