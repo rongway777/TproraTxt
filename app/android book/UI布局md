@@ -1,0 +1,163 @@
+布局整体
+
+- 线性布局：LinerLayout
+- 相对布局：RelativeLayout
+- 帧布局：FragmentLayout，会覆盖。一层一层的。
+- 表格布局：TableLayout 计算器
+- 网格布局：GridLayout
+- 约束布局：Cons.....
+
+![image-20210502115343612](image/image-20210502115343612.png)
+
+- dp：长宽。
+
+- sp：字体
+
+
+#### 线性布局  *
+
+![image-20210502125602473](image/image-20210502125602473.png)
+
+layout_weight权重标签
+
+- 水平就把width=0，按权重比例。
+- 竖直就把height=0，按权重比例。
+
+![image-20210502131516233](image/image-20210502131516233.png)
+
+![image-20210502131810618](image/image-20210502131810618.png)
+
+
+
+#### 相对布局 *
+
+align对齐方式：
+
+- **start和start对齐。end和end对齐。**
+- **top和top对齐。bottom和bottom对齐。**
+
+to对齐方式：
+
+- **start和end。end和start。**
+- **top和bottom。bottom和top。**
+
+也就是这五种：
+
+- **android:layout_alignParentEnd = "true"**  
+- **android:centerHorizontal = "true"**
+- **android:centerInParent = "true"**
+- **android:layout_toEndOf = "@id/"**
+- **android:layout_alignEnd ="@id/"**
+
+![image-20210509114226706](image/image-20210509114226706.png)
+
+![image-20210509114434811](image/image-20210509114434811.png)
+
+![image-20210509121220497](image/image-20210509121220497.png)
+
+#### 约束布局 *
+
+注意：
+
+1. **对于app:constraint()_to()Of。只能水平和水平。竖直和竖直。**
+2. **百分比用app:layout_constarintHorizontal_bias = "0."来控制。取值0~1 默认0.5**
+3. **距离用android:layout_marginStart = "...dp"来控制。**
+
+##### 全约束（父容器）
+
+- **app:layout_constraintBottom_toBottomOf = "parent"**  底部和(parent)的底部连线。
+- **app:layout_constraintTop_toTopOf = "parent"** 顶部和(parent)的顶部连线。
+- **app:layout_constraintStart_toStartOf = "parent"** 左边和(parent)的左边连线。
+- **app:layout_constraintEnd_toEndOf = "parent"** 右边和(parent)的右边连线。
+- **app:layout_constraintVertical_bias  = "0.2"**   竖直20%
+- **app:layout_constraintHorizontal_bias = "0.4"** 水平40%
+
+![image-20210619230708947](image/image-20210619230708947.png)
+
+##### 半约束（父容器）
+
+- **app:layout_constraintTop_toTopOf = "parent"** 顶部和(parent)的顶部连线。
+- **app:layout_constraintStart_toStartOf = "parent"** 左边和(parent)的左边连线。
+- **android:layout_marginStart = "120dp"** 
+- **amdroid:layout_marginTop = "140dp"**
+
+![image-20210619231335942](image/image-20210619231335942.png)
+
+##### Layout控制面板
+
+正方形内的三种曲线：
+
+1. **wrap_content**
+2. **match constraint (width=0/height = 0)**
+3. **fixed (width = "ndp" / height = "0dp")**
+
+![image-20210620122222239](image/image-20210620122222239.png)
+
+![image-20210620122341407](image/image-20210620122341407.png)
+
+##### GuideLine
+
+- **android:orientation  = "horizontal"**
+- **app:layout_constraintGuide_percent = "0.25" 25%**
+- **app:layout_constraintGuide_begin = "50" 离Top距离50dp**
+- **app:layout_constraintGuide_end = "60" 离Bottom60dp**
+- 对于GuideLine来说。**Start和End是一样的**。例如
+  - **app:layout_constraintEnd_toStartOf = "@id/guideLine"**	
+  - **app:layout_constraintEnd_toEndOf = "@id/guideLine"**	
+  - 是一样的
+
+注意：
+
+- **在左右或者上下都有约束的时候，width或者height=0就等于match constraint(填充约束区域)**
+
+#### 帧布局
+
+最简单的布局，**第一个控件在最底层**。通过layout_gravity来调整控件的位置。
+
+布局独有：在布局标签当中指定最顶层的控件，一般是个图片。
+
+- **android:foreground = "@drable/"**
+- **android:foregroundGravity = "center" 相对于parent**
+
+![image-20210617103808921](image/image-20210617103808921.png)
+
+![image-20210617103657060](image/image-20210617103657060.png)
+
+#### 表格布局
+
+很僵硬的一种布局。行列是死的。n行m列。进化版本==》网格布局
+
+- **stretchColumns = "0,1,2" 可填充**  
+  - 每一行自适应填充。0 1 2 列进行扩大。但是当放不下的时侯，会超出。
+- **shrinkColumns = "*"。可收缩** 
+  - 所有列可以根据情况缩小。
+- **<TableRow>标签**
+  - **里面的子标签width默认都是wrap_content的**。
+- **直接放在TableLayout当中，宽度默认是parent。**
+
+![image-20210617123641499](image/image-20210617123641499.png)
+
+#### 网格布局
+
+表格布局的升级。可以合并。
+
+1. **orizenation设置为horizontal的时候，设置的rowCount是没有用处的。反之，vertical的时候，columnCount没有用。**
+2. **合并的行列有元素的话，合并以后会推开。依次往后推。**
+3. **Gridlayout的宽高一般是wrap_content。**
+
+属性：
+
+- **android:orizenation = ""**
+- **android:columnCount=""/android:rowCount=""**
+- **android:layout_rowSpan = "n"**
+- **android:layout_columnSpan = "n"**
+
+![image-20210617180006082](image/image-20210617180006082.png)
+
+![image-20210617180227084](image/image-20210617180227084.png)
+
+#### 滚动布局
+
+只能有一个子标签。多个子标签的话需要包起来。
+
+![image-20210616085246227](image/image-20210616085246227.png)
